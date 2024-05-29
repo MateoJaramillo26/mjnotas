@@ -1,8 +1,21 @@
 namespace mjnotas.Views;
 
+[QueryProperty(nameof(ItemId), nameof(ItemId))]
 public partial class MJnotepage : ContentPage
 {
-    string _fileName = Path.Combine(FileSystem.AppDataDirectory, "notes.txt");
+    public string ItemId
+    {
+        set { LoadNote(value); }
+    }
+    public MJnotepage()
+	{
+		InitializeComponent();
+
+        string appDataPath = FileSystem.AppDataDirectory;
+        string randomFileName = $"{Path.GetRandomFileName()}.notes.txt";
+
+        LoadNote(Path.Combine(appDataPath, randomFileName));
+    }
 
     private void LoadNote(string fileName)
     {
@@ -18,29 +31,23 @@ public partial class MJnotepage : ContentPage
         BindingContext = noteModel;
     }
 
-    public MJnotepage()
-	{
-		InitializeComponent();
+    private async void SaveButton_Clicked(object sender, EventArgs e)
+    {
+        if (BindingContext is Models.MJnote note)
+            File.WriteAllText(note.Filename, TextEditor.Text);
 
-        string appDataPath = FileSystem.AppDataDirectory;
-        string randomFileName = $"{Path.GetRandomFileName()}.notes.txt";
-
-        LoadNote(Path.Combine(appDataPath, randomFileName));
+        await Shell.Current.GoToAsync("..");
     }
 
-
-    private void SaveButton_Clicked(object sender, EventArgs e)
+    private async void DeleteButton_Clicked(object sender, EventArgs e)
     {
-        // Save the file.
-        File.WriteAllText(_fileName, TextEditor.Text);
-    }
+        if (BindingContext is Models.MJnote note)
+        {
+            // Delete the file.
+            if (File.Exists(note.Filename))
+                File.Delete(note.Filename);
+        }
 
-    private void DeleteButton_Clicked(object sender, EventArgs e)
-    {
-        // Delete the file.
-        if (File.Exists(_fileName))
-            File.Delete(_fileName);
-
-        TextEditor.Text = string.Empty;
+        await Shell.Current.GoToAsync("..");
     }
 }

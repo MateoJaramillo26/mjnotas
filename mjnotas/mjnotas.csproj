@@ -73,6 +73,9 @@
 	  <MauiXaml Update="Views\MJaboutpage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\MJAllNotesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\MJnotepage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
