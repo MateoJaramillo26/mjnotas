@@ -1,4 +1,4 @@
-namespace mjnotas;
+namespace mjnotas.Views;
 
 public partial class MJnotepage : ContentPage
 {

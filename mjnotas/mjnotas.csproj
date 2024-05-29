@@ -70,17 +70,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="MJaboutpage.xaml">
+	  <MauiXaml Update="Views\MJaboutpage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="MJnotepage.xaml">
+	  <MauiXaml Update="Views\MJnotepage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Folder Include="Models\" />
-	  <Folder Include="Views\" />
 	</ItemGroup>
 
 </Project>
